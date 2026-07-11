@@ -293,6 +293,7 @@ systemctl reboot --firmware-setup
 ```bash
 sbctl enroll-keys -m
 sbctl verify | awk '/EFI\/(Linux|systemd|Boot)\/.* is not signed$/ {print $2}' | xargs -r sbctl sign -s
+sudo sh -c 'for module in $(find /usr/lib/modules/$(uname -r)/ -name "nvidia*.ko*"); do sbctl sign -s "$module"; done'
 
 ```
 
